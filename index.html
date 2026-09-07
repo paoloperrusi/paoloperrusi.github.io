@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paolo Perrusi — Portfolio & Deployed Projects</title>
+  <meta name="description" content="Explore interactive applications, creative web experiments, and tools deployed on GitHub Pages by Paolo Perrusi.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #08080c;
+      --bg-surface: #0f1016;
+      --bg-elevated: #161722;
+      --bg-card: rgba(20, 21, 31, 0.7);
+      --bg-card-hover: rgba(28, 30, 44, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --border-hover: rgba(139, 92, 246, 0.35);
+      --border-active: #6366f1;
+      
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --accent-cyan: #06b6d4;
+      --accent-purple: #a855f7;
+      --accent-pink: #ec4899;
+      --success: #10b981;
+      --warning: #f59e0b;
+      
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      
+      --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.15);
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Ambient background lighting */
+    .ambient-glow {
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(6, 182, 212, 0.05) 45%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-grid {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Top Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(8, 8, 12, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 100;
+      padding: 0 1.5rem;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+      padding: 2px;
+      position: relative;
+    }
+
+    .brand-avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      background: var(--bg-surface);
+    }
+
+    .brand-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .brand-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .api-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: #34d399;
+      transition: var(--transition);
+    }
+
+    .api-status.syncing {
+      background: rgba(99, 102, 241, 0.1);
+      border-color: rgba(99, 102, 241, 0.3);
+      color: #818cf8;
+    }
+
+    .api-status.rate-limited {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: #fbbf24;
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: currentColor;
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    .pulse-dot.anim {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .btn-icon {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .btn-icon:hover {
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+      background: var(--bg-elevated);
+      transform: translateY(-1px);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero Section */
+    .hero {
+      margin-bottom: 3.5rem;
+      position: relative;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(6, 182, 212, 0.08);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      width: fit-content;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #ffffff 40%, #cbd5e1 70%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--primary), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 680px;
+      line-height: 1.6;
+    }
+
+    /* Stats Banner */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+      max-width: 620px;
+    }
+
+    .stat-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), transparent);
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+
+    /* Filter & Search Bar */
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 240px;
+      position: relative;
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 40px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      padding: 0 14px 0 40px;
+      font-size: 0.875rem;
+      font-family: var(--font-body);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--border-active);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+    }
+
+    .filter-btn.active {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: var(--primary);
+      color: #a5b4fc;
+      font-weight: 500;
+    }
+
+    .sort-select {
+      height: 40px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      padding: 0 12px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      outline: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .sort-select:focus {
+      border-color: var(--border-active);
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Project Card */
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .project-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .badge-pages {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .badge-repo {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+    }
+
+    .project-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .topics-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1.25rem;
+    }
+
+    .topic-tag {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: #c4b5fd;
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .meta-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lang-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .lang-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+
+    .btn-launch {
+      background: linear-gradient(135deg, var(--primary), #4f46e5);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.25);
+    }
+
+    .btn-launch:hover {
+      background: linear-gradient(135deg, #7174ff, #5850ec);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-source {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .btn-source:hover {
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+      background: var(--bg-surface);
+    }
+
+    /* Skeleton Loading Cards */
+    .skeleton-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      height: 310px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skeleton-box {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skeleton-box::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      transform: translateX(-100%);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+      100% { transform: translateX(100%); }
+    }
+
+    /* Empty state */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 1rem;
+      background: var(--bg-surface);
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-lg);
+    }
+
+    .empty-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    .empty-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .empty-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      padding: 2.5rem 1.5rem;
+      margin-top: auto;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      .controls-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filter-group {
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+      .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient lighting effects -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-grid"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="https://github.com/paoloperrusi" target="_blank" rel="noopener noreferrer" class="brand">
+        <div class="brand-avatar">
+          <img id="user-avatar" src="https://avatars.githubusercontent.com/u/57806219?v=4" alt="Paolo Perrusi">
+        </div>
+        <div class="brand-info">
+          <span class="brand-name" id="user-name">Paolo Perrusi</span>
+          <span class="brand-tag">@paoloperrusi</span>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <div id="sync-status" class="api-status" title="GitHub Public API Live Sync">
+          <span class="pulse-dot anim"></span>
+          <span id="sync-text">Live Sync</span>
+        </div>
+
+        <button id="refresh-btn" class="btn-icon" title="Refresh projects from GitHub" aria-label="Refresh">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+          </svg>
+        </button>
+
+        <a href="https://github.com/paoloperrusi" target="_blank" rel="noopener noreferrer" class="btn-icon" title="View GitHub Profile" aria-label="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span>⚡</span> Live GitHub Pages Deployments
+        </div>
+        <h1 class="hero-title">
+          Interactive Projects &amp; <span>Generative Web Tools</span>
+        </h1>
+        <p class="hero-desc" id="hero-bio">
+          A showcase of creative web applications, experimental tools, and digital synthesis software built and deployed directly to GitHub Pages.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-card">
+            <div class="stat-value" id="stat-pages">1</div>
+            <div class="stat-label">Pages Deployed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-repos">2</div>
+            <div class="stat-label">Public Repos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-stars">0</div>
+            <div class="stat-label">GitHub Stars</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls / Search & Filters -->
+    <section class="controls-bar">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="search-input" class="search-input" placeholder="Search projects by name, description, topic...">
+      </div>
+
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="pages">
+          <span>🚀</span> Deployed on Pages
+        </button>
+        <button class="filter-btn" data-filter="all">
+          <span>📂</span> All Repos
+        </button>
+      </div>
+
+      <select id="sort-select" class="sort-select" aria-label="Sort projects">
+        <option value="updated">Recently Updated</option>
+        <option value="stars">Most Stars</option>
+        <option value="name">Alphabetical (A-Z)</option>
+      </select>
+    </section>
+
+    <!-- Project Cards Grid -->
+    <section id="projects-grid" class="projects-grid">
+      <!-- Loading skeletons (replaced dynamically) -->
+      <div class="skeleton-card">
+        <div class="skeleton-box" style="height: 24px; width: 60%;"></div>
+        <div class="skeleton-box" style="height: 16px; width: 90%;"></div>
+        <div class="skeleton-box" style="height: 16px; width: 75%;"></div>
+        <div class="skeleton-box" style="height: 28px; width: 40%; margin-top: auto;"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-box" style="height: 24px; width: 50%;"></div>
+        <div class="skeleton-box" style="height: 16px; width: 85%;"></div>
+        <div class="skeleton-box" style="height: 16px; width: 70%;"></div>
+        <div class="skeleton-box" style="height: 28px; width: 40%; margin-top: auto;"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        <p><strong>Paolo Perrusi</strong> &bull; Creative Developer</p>
+        <p>Dynamic showcase powered by the GitHub Public REST API &amp; GitHub Pages</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/paoloperrusi/rift" target="_blank" rel="noopener noreferrer">
+          <span>RIFT App</span>
+        </a>
+        <a href="https://github.com/paoloperrusi" target="_blank" rel="noopener noreferrer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          <span>GitHub Profile</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script>
+    const GITHUB_USERNAME = 'paoloperrusi';
+    const PORTFOLIO_REPO = 'paoloperrusi.github.io';
+    const CACHE_KEY = 'portfolio_github_cache_v1';
+    const CACHE_TTL = 10 * 60 * 1000; // 10 minutes cache
+
+    // Language colors palette
+    const LANG_COLORS = {
+      'HTML': '#e34c26',
+      'JavaScript': '#f1e05a',
+      'TypeScript': '#3178c6',
+      'CSS': '#563d7c',
+      'Python': '#3572A5',
+      'Rust': '#dea584',
+      'C++': '#f34b7d',
+      'Go': '#00ADD8',
+      'Vue': '#41b883',
+      'React': '#61dafb'
+    };
+
+    // Initial fallback data to guarantee immediate rendering
+    const INITIAL_FALLBACK = {
+      user: {
+        login: 'paoloperrusi',
+        name: 'Paolo Perrusi',
+        avatar_url: 'https://avatars.githubusercontent.com/u/57806219?v=4',
+        bio: 'Creative technologist & developer crafting interactive tools and procedural web applications.',
+        public_repos: 2,
+        followers: 2
+      },
+      repos: [
+        {
+          name: 'rift',
+          full_name: 'paoloperrusi/rift',
+          description: 'RIFT — Image Fracture & Procedural Glitch Tool. Creative client-side synthesis with custom shaders, sorting & scripting.',
+          homepage: 'https://paoloperrusi.github.io/rift/',
+          html_url: 'https://github.com/paoloperrusi/rift',
+          has_pages: true,
+          language: 'HTML',
+          stargazers_count: 0,
+          forks_count: 0,
+          topics: ['glitch-art', 'procedural-generation', 'canvas', 'image-processing'],
+          updated_at: '2026-09-07T21:45:00Z'
+        }
+      ],
+      timestamp: Date.now()
+    };
+
+    let allRepositories = [];
+    let currentFilter = 'pages'; // 'pages' | 'all'
+    let currentSearch = '';
+    let currentSort = 'updated';
+
+    // Elements
+    const grid = document.getElementById('projects-grid');
+    const searchInput = document.getElementById('search-input');
+    const sortSelect = document.getElementById('sort-select');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const refreshBtn = document.getElementById('refresh-btn');
+    const syncStatus = document.getElementById('sync-status');
+    const syncText = document.getElementById('sync-text');
+    const statPages = document.getElementById('stat-pages');
+    const statRepos = document.getElementById('stat-repos');
+    const statStars = document.getElementById('stat-stars');
+    const userNameEl = document.getElementById('user-name');
+    const userAvatarEl = document.getElementById('user-avatar');
+    const heroBioEl = document.getElementById('hero-bio');
+
+    function setSyncState(state, message) {
+      syncStatus.className = 'api-status ' + state;
+      syncText.textContent = message;
+    }
+
+    // Format relative or friendly date
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      const now = new Date();
+      const diffDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+
+      if (diffDays === 0) return 'Updated today';
+      if (diffDays === 1) return 'Updated yesterday';
+      if (diffDays < 30) return `Updated ${diffDays}d ago`;
+      return 'Updated ' + date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    // Determine accurate Pages URL
+    function getPagesUrl(repo) {
+      if (repo.homepage && repo.homepage.startsWith('http')) {
+        return repo.homepage;
+      }
+      if (repo.name.toLowerCase() === `${GITHUB_USERNAME.toLowerCase()}.github.io`) {
+        return `https://${GITHUB_USERNAME}.github.io/`;
+      }
+      return `https://${GITHUB_USERNAME}.github.io/${repo.name}/`;
+    }
+
+    // Render cards
+    function renderProjects() {
+      // Filter out this portfolio itself from the deployed apps cards so it doesn't loop
+      let filtered = allRepositories.filter(repo => {
+        if (repo.name.toLowerCase() === PORTFOLIO_REPO.toLowerCase()) return false;
+        if (currentFilter === 'pages' && !repo.has_pages) return false;
+        
+        if (currentSearch) {
+          const q = currentSearch.toLowerCase();
+          const matchName = repo.name.toLowerCase().includes(q);
+          const matchDesc = (repo.description || '').toLowerCase().includes(q);
+          const matchLang = (repo.language || '').toLowerCase().includes(q);
+          const matchTopics = (repo.topics || []).some(t => t.toLowerCase().includes(q));
+          return matchName || matchDesc || matchLang || matchTopics;
+        }
+        return true;
+      });
+
+      // Sort
+      filtered.sort((a, b) => {
+        if (currentSort === 'stars') return (b.stargazers_count || 0) - (a.stargazers_count || 0);
+        if (currentSort === 'name') return a.name.localeCompare(b.name);
+        // Default updated
+        return new Date(b.updated_at || 0) - new Date(a.updated_at || 0);
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">🔍</div>
+            <h3 class="empty-title">No projects found</h3>
+            <p class="empty-desc">No repositories matched your filter or search query. Try clearing the search or switching filters.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(repo => {
+        const isPages = repo.has_pages;
+        const pagesUrl = getPagesUrl(repo);
+        const lang = repo.language || 'Code';
+        const langColor = LANG_COLORS[lang] || '#8b5cf6';
+        const topics = (repo.topics && repo.topics.length > 0) ? repo.topics : (repo.language ? [repo.language.toLowerCase()] : []);
+        const formattedTitle = repo.name.toUpperCase() === 'RIFT' ? 'RIFT' : repo.name.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+        return `
+          <article class="project-card">
+            <div class="card-top">
+              <div class="meta-left">
+                ${isPages ? `
+                  <span class="badge-pages">
+                    <span class="pulse-dot"></span> Live on Pages
+                  </span>
+                ` : `
+                  <span class="badge-repo">Source Repository</span>
+                `}
+              </div>
+              <div class="lang-indicator">
+                <span class="lang-dot" style="background-color: ${langColor};"></span>
+                <span>${lang}</span>
+              </div>
+            </div>
+
+            <h2 class="project-title">${formattedTitle}</h2>
+
+            <p class="project-desc">
+              ${repo.description || 'Interactive web application deployed and maintained on GitHub Pages.'}
+            </p>
+
+            ${topics.length > 0 ? `
+              <div class="topics-list">
+                ${topics.slice(0, 4).map(t => `<span class="topic-tag">#${t}</span>`).join('')}
+              </div>
+            ` : ''}
+
+            <div class="card-meta">
+              <span>${formatDate(repo.updated_at)}</span>
+              <span>⭐ ${repo.stargazers_count || 0}</span>
+            </div>
+
+            <div class="card-actions">
+              ${isPages ? `
+                <a href="${pagesUrl}" target="_blank" rel="noopener noreferrer" class="btn-launch">
+                  <span>Launch App</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              ` : `
+                <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="btn-launch">
+                  <span>View Repository</span>
+                </a>
+              `}
+              <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="btn-source" title="Source Code">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // Update stats and user display
+    function updateStats(user, repos) {
+      if (user) {
+        if (user.name) userNameEl.textContent = user.name;
+        if (user.avatar_url) userAvatarEl.src = user.avatar_url;
+        if (user.bio) heroBioEl.textContent = user.bio;
+        statRepos.textContent = user.public_repos ?? repos.length;
+      }
+      
+      const pagesCount = repos.filter(r => r.has_pages && r.name.toLowerCase() !== PORTFOLIO_REPO.toLowerCase()).length;
+      statPages.textContent = pagesCount;
+
+      const totalStars = repos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0);
+      statStars.textContent = totalStars;
+    }
+
+    // Fetch from GitHub REST API
+    async function loadGitHubData(forceRefresh = false) {
+      setSyncState('syncing', 'Syncing API...');
+      refreshBtn.style.transform = 'rotate(180deg)';
+
+      // Check cache first
+      if (!forceRefresh) {
+        try {
+          const cached = localStorage.getItem(CACHE_KEY);
+          if (cached) {
+            const data = JSON.parse(cached);
+            if (Date.now() - data.timestamp < CACHE_TTL) {
+              allRepositories = data.repos;
+              updateStats(data.user, data.repos);
+              renderProjects();
+              setSyncState('', 'Live Cached');
+              refreshBtn.style.transform = 'none';
+              return;
+            }
+          }
+        } catch (e) {
+          console.warn('Cache error:', e);
+        }
+      }
+
+      try {
+        const [userRes, reposRes] = await Promise.all([
+          fetch(`https://api.github.com/users/${GITHUB_USERNAME}`),
+          fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`)
+        ]);
+
+        if (userRes.status === 403 || reposRes.status === 403) {
+          setSyncState('rate-limited', 'API Limit (Cached)');
+          console.warn('GitHub API rate limit reached, using fallback.');
+          applyFallbackData();
+          return;
+        }
+
+        if (!reposRes.ok) throw new Error(`HTTP ${reposRes.status}`);
+
+        const userData = await userRes.json();
+        const reposData = await reposRes.json();
+
+        allRepositories = Array.isArray(reposData) ? reposData : [];
+
+        // Save to cache
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify({
+            user: userData,
+            repos: allRepositories,
+            timestamp: Date.now()
+          }));
+        } catch (e) {}
+
+        updateStats(userData, allRepositories);
+        renderProjects();
+        setSyncState('', 'Live Synced');
+      } catch (err) {
+        console.error('Fetch error:', err);
+        setSyncState('rate-limited', 'Offline (Fallback)');
+        applyFallbackData();
+      } finally {
+        setTimeout(() => { refreshBtn.style.transform = 'none'; }, 300);
+      }
+    }
+
+    function applyFallbackData() {
+      allRepositories = INITIAL_FALLBACK.repos;
+      updateStats(INITIAL_FALLBACK.user, INITIAL_FALLBACK.repos);
+      renderProjects();
+    }
+
+    // Event listeners
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value;
+      renderProjects();
+    });
+
+    sortSelect.addEventListener('change', (e) => {
+      currentSort = e.target.value;
+      renderProjects();
+    });
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.getAttribute('data-filter');
+        renderProjects();
+      });
+    });
+
+    refreshBtn.addEventListener('click', () => {
+      loadGitHubData(true);
+    });
+
+    // Start
+    loadGitHubData();
+  </script>
+</body>
+</html>
