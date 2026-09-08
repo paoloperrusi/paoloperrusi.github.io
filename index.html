@@ -875,6 +875,19 @@
           updated_at: '2026-09-08T07:45:00Z'
         },
         {
+          name: 'fractal-garden',
+          full_name: 'paoloperrusi/fractal-garden',
+          description: 'Fractal Tree Generator — 3D Botanical Synthesizer and procedural tree generator with live parametric controls & 3D export.',
+          homepage: 'https://paoloperrusi.github.io/fractal-garden/',
+          html_url: 'https://github.com/paoloperrusi/fractal-garden',
+          has_pages: true,
+          language: 'TypeScript',
+          stargazers_count: 0,
+          forks_count: 0,
+          topics: ['threejs', 'procedural-generation', 'botanical-synthesizer', 'vite', 'generative-art'],
+          updated_at: '2026-09-08T07:58:00Z'
+        },
+        {
           name: 'lucidb',
           full_name: 'paoloperrusi/lucidb',
           description: 'LuciDB Lite — Lightweight, zero-bloat PostgreSQL query performance monitor and deploy regression detector.',
@@ -890,15 +903,15 @@
         {
           name: 'fractal_garden_legacy',
           full_name: 'paoloperrusi/fractal_garden_legacy',
-          description: 'Fractal Tree Garden (Legacy) — Interactive 3D procedural tree growth, stochastic ecosystems, and ambient organic algorithms.',
+          description: 'Fractal Tree Garden (Legacy) — Original 3D procedural tree growth, stochastic ecosystems, and ambient organic algorithms.',
           homepage: 'https://paoloperrusi.github.io/fractal_garden_legacy/',
           html_url: 'https://github.com/paoloperrusi/fractal_garden_legacy',
           has_pages: true,
-          language: 'TypeScript',
+          language: 'JavaScript',
           stargazers_count: 0,
           forks_count: 0,
-          topics: ['legacy', 'fractals', 'procedural-generation', 'generative-art', 'threejs'],
-          updated_at: '2026-09-08T07:39:00Z'
+          topics: ['legacy', 'fractals', 'procedural-generation', 'generative-art', 'p5js'],
+          updated_at: '2026-09-07T21:53:00Z'
         },
         {
           name: 'rift_legacy',
@@ -1011,8 +1024,10 @@
           formattedTitle = 'RIFT';
         } else if (repo.name.toLowerCase() === 'rift_legacy' || repo.name.toLowerCase() === 'rift-legacy') {
           formattedTitle = 'RIFT (Legacy)';
-        } else if (repo.name.toLowerCase() === 'fractal_garden_legacy' || repo.name.toLowerCase() === 'fractal-garden-legacy' || repo.name.toLowerCase() === 'fractal-garden') {
+        } else if (repo.name.toLowerCase() === 'fractal_garden_legacy' || repo.name.toLowerCase() === 'fractal-garden-legacy') {
           formattedTitle = 'Fractal Tree Garden (Legacy)';
+        } else if (repo.name.toLowerCase() === 'fractal-garden' || repo.name.toLowerCase() === 'fractal_garden') {
+          formattedTitle = 'Fractal Tree Generator';
         } else if (repo.name.toLowerCase() === 'lucidb') {
           formattedTitle = 'LuciDB Lite';
         } else {
