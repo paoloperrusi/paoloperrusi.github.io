@@ -451,6 +451,21 @@
       font-family: var(--font-mono);
     }
 
+    .badge-legacy {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fcd34d;
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
     .lang-indicator {
       display: inline-flex;
       align-items: center;
@@ -847,6 +862,19 @@
       },
       repos: [
         {
+          name: 'rift-2-open',
+          full_name: 'paoloperrusi/rift-2-open',
+          description: 'RIFT — High-Performance Procedural Image Synthesis & Glitch Engine with modular signal processing pipeline.',
+          homepage: 'https://paoloperrusi.github.io/rift-2-open/',
+          html_url: 'https://github.com/paoloperrusi/rift-2-open',
+          has_pages: true,
+          language: 'JavaScript',
+          stargazers_count: 0,
+          forks_count: 0,
+          topics: ['glitch-engine', 'procedural-generation', 'image-processing', 'canvas', 'dsp'],
+          updated_at: '2026-09-08T07:45:00Z'
+        },
+        {
           name: 'lucidb',
           full_name: 'paoloperrusi/lucidb',
           description: 'LuciDB Lite — Lightweight, zero-bloat PostgreSQL query performance monitor and deploy regression detector.',
@@ -860,30 +888,30 @@
           updated_at: '2026-09-08T07:00:00Z'
         },
         {
-          name: 'fractal-garden',
-          full_name: 'paoloperrusi/fractal-garden',
-          description: 'Fractal Tree Garden — Interactive 3D procedural tree growth, stochastic ecosystems, and ambient organic algorithms.',
-          homepage: 'https://paoloperrusi.github.io/fractal-garden/',
-          html_url: 'https://github.com/paoloperrusi/fractal-garden',
+          name: 'fractal_garden_legacy',
+          full_name: 'paoloperrusi/fractal_garden_legacy',
+          description: 'Fractal Tree Garden (Legacy) — Interactive 3D procedural tree growth, stochastic ecosystems, and ambient organic algorithms.',
+          homepage: 'https://paoloperrusi.github.io/fractal_garden_legacy/',
+          html_url: 'https://github.com/paoloperrusi/fractal_garden_legacy',
           has_pages: true,
-          language: 'JavaScript',
+          language: 'TypeScript',
           stargazers_count: 0,
           forks_count: 0,
-          topics: ['fractals', 'procedural-generation', 'generative-art', 'simulation', 'canvas'],
-          updated_at: '2026-09-07T21:53:00Z'
+          topics: ['legacy', 'fractals', 'procedural-generation', 'generative-art', 'threejs'],
+          updated_at: '2026-09-08T07:39:00Z'
         },
         {
-          name: 'rift',
-          full_name: 'paoloperrusi/rift',
-          description: 'RIFT — Image Fracture & Procedural Glitch Tool. Creative client-side synthesis with custom shaders, sorting & scripting.',
-          homepage: 'https://paoloperrusi.github.io/rift/',
-          html_url: 'https://github.com/paoloperrusi/rift',
+          name: 'rift_legacy',
+          full_name: 'paoloperrusi/rift_legacy',
+          description: 'RIFT (Legacy) — Original client-side image fracture, CRT glitch, and pixel manipulation prototype.',
+          homepage: 'https://paoloperrusi.github.io/rift_legacy/',
+          html_url: 'https://github.com/paoloperrusi/rift_legacy',
           has_pages: true,
           language: 'HTML',
           stargazers_count: 0,
           forks_count: 0,
-          topics: ['glitch-art', 'procedural-generation', 'canvas', 'image-processing'],
-          updated_at: '2026-09-07T21:45:00Z'
+          topics: ['legacy', 'glitch-art', 'procedural-generation', 'canvas'],
+          updated_at: '2026-09-08T06:01:00Z'
         }
       ],
       timestamp: Date.now()
@@ -977,7 +1005,19 @@
         const lang = repo.language || 'Code';
         const langColor = LANG_COLORS[lang] || '#a1a1aa';
         const topics = (repo.topics && repo.topics.length > 0) ? repo.topics : (repo.language ? [repo.language.toLowerCase()] : []);
-        const formattedTitle = repo.name.toUpperCase() === 'RIFT' ? 'RIFT' : repo.name.toLowerCase() === 'lucidb' ? 'LuciDB Lite' : repo.name.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        const isLegacy = repo.name.toLowerCase().includes('legacy') || (repo.topics && repo.topics.includes('legacy'));
+        let formattedTitle = repo.name;
+        if (repo.name.toLowerCase() === 'rift-2-open' || repo.name.toLowerCase() === 'rift') {
+          formattedTitle = 'RIFT';
+        } else if (repo.name.toLowerCase() === 'rift_legacy' || repo.name.toLowerCase() === 'rift-legacy') {
+          formattedTitle = 'RIFT (Legacy)';
+        } else if (repo.name.toLowerCase() === 'fractal_garden_legacy' || repo.name.toLowerCase() === 'fractal-garden-legacy' || repo.name.toLowerCase() === 'fractal-garden') {
+          formattedTitle = 'Fractal Tree Garden (Legacy)';
+        } else if (repo.name.toLowerCase() === 'lucidb') {
+          formattedTitle = 'LuciDB Lite';
+        } else {
+          formattedTitle = repo.name.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        }
 
         return `
           <article class="project-card">
@@ -990,6 +1030,9 @@
                 ` : `
                   <span class="badge-repo">Repository</span>
                 `}
+                ${isLegacy ? `
+                  <span class="badge-legacy">Legacy</span>
+                ` : ''}
               </div>
               <div class="lang-indicator">
                 <span class="lang-dot" style="background-color: ${langColor};"></span>
