@@ -842,10 +842,23 @@
         name: 'Paolo Perrusi',
         avatar_url: 'https://avatars.githubusercontent.com/u/57806219?v=4',
         bio: 'Creative technologist & developer crafting interactive tools and procedural web applications.',
-        public_repos: 3,
+        public_repos: 4,
         followers: 2
       },
       repos: [
+        {
+          name: 'lucidb',
+          full_name: 'paoloperrusi/lucidb',
+          description: 'LuciDB Lite — Lightweight, zero-bloat PostgreSQL query performance monitor and deploy regression detector.',
+          homepage: 'https://paoloperrusi.github.io/lucidb/',
+          html_url: 'https://github.com/paoloperrusi/lucidb',
+          has_pages: true,
+          language: 'JavaScript',
+          stargazers_count: 0,
+          forks_count: 0,
+          topics: ['postgresql', 'performance', 'database', 'developer-tools', 'ai'],
+          updated_at: '2026-09-08T07:00:00Z'
+        },
         {
           name: 'fractal-garden',
           full_name: 'paoloperrusi/fractal-garden',
@@ -964,7 +977,7 @@
         const lang = repo.language || 'Code';
         const langColor = LANG_COLORS[lang] || '#a1a1aa';
         const topics = (repo.topics && repo.topics.length > 0) ? repo.topics : (repo.language ? [repo.language.toLowerCase()] : []);
-        const formattedTitle = repo.name.toUpperCase() === 'RIFT' ? 'RIFT' : repo.name.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        const formattedTitle = repo.name.toUpperCase() === 'RIFT' ? 'RIFT' : repo.name.toLowerCase() === 'lucidb' ? 'LuciDB Lite' : repo.name.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 
         return `
           <article class="project-card">
